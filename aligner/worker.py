@@ -30,7 +30,7 @@ def write_file(f, doc):
 def save_docs(src_doc, target_doc, src_lang, target_lang, out_dir, file_count):
     src_path = os.path.join(out_dir, src_lang)
     target_path = os.path.join(out_dir, target_lang)
-    file_name = "file_{:06d}.txt".format(file_count)
+    file_name = "doc_{:06d}.txt".format(file_count)
     src_out = os.path.join(src_path, file_name)
     target_out = os.path.join(target_path, file_name)
     write_file(src_out, src_doc)
@@ -55,6 +55,7 @@ def do_work(src_lang, target_lang, src_df, src_corpus, target_corpus, out_dir):
         processed_count += 1
     print("\nwriting aligned documents completed successfully!")
 
+
 def load_corpus(corpus_dir):
     st = time.time()
     corpus = list()
@@ -62,6 +63,7 @@ def load_corpus(corpus_dir):
         print("subdir: " + subdir)
         for f in files:
             wiki_file = os.path.join(subdir, f)
+            print("file: " + wiki_file)
             with open(wiki_file, encoding='utf-8') as wiki_reader:
                 text = wiki_reader.read()
                 soup = BeautifulSoup(text, 'html.parser')

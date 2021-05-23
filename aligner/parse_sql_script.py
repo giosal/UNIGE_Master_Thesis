@@ -28,7 +28,6 @@ def read_sql_dump(dump_filename):
                         sio.write('\t'.join(record.replace('\'', '').split(',')))
                         sio.write("\n")
                     except BaseException as error:
-                        print('error: {0}'.format(error))
                         pass
     sio.seek(0)
     print("sql_dump processed in %s seconds" % (time.time() - st))
@@ -41,7 +40,7 @@ def sql2df(dump_filename, target_lang):
     my_csv = read_sql_dump(dump_filename)
     print("commencing read_csv")
     start_time = time.time()
-    df = pd.read_csv(my_csv, delimiter='\t', error_bad_lines=False, warn_bad_lines=False, dtype={"ll_from": "string", "ll_lang": "string", "ll_title": "string"})
+    df = pd.read_csv(my_csv, delimiter='\t', error_bad_lines=False, warn_bad_lines=False)
     print(df.dtypes)
     print("csv read in %s seconds" % (time.time() - start_time))
     selected_df = df[df.ll_lang == target_lang]
